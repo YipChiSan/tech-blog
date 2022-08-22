@@ -72,6 +72,31 @@ router.get('/profile', withAuth, async (req, res) => {
   }
 });
 
+router.get('/comment/:id', withAuth, async (req, res) => {
+  try {
+    const commentData = await Comment.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          attributes: ['name'],
+        },
+        {
+          model: Blog,
+        }
+      ],
+    });
+
+    const comment = commentData.get({plain: true});
+
+    res.render('comment', {
+      ...comment,
+      logged_in: req.session.logged_in
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 router.get('/login', (req, res) => {
   // If the user is already logged in, redirect the request to another route
   if (req.session.logged_in) {
