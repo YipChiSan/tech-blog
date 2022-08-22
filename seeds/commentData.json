@@ -1,0 +1,27 @@
+[
+  {
+    "context": "Amazong post! Love it.",
+    "blog_id" : 1
+  },
+  {
+    "context": "Good Job!",
+    "blog_id" : 1
+  },
+  {
+    "context": "Thanks for sharing!",
+    "blog_id" : 2
+  },
+  {
+    "context": "LOL!",
+    "blog_id" : 2
+  },
+    {
+    "context": "Too bad!",
+    "blog_id" : 3
+  },
+    {
+    "context": "Waste of time",
+    "blog_id" : 3
+  }
+
+]
