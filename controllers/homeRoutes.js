@@ -106,4 +106,9 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
+router.get('/newBlog', (req, res) => {
+  
+    res.render('newBlog');
+});
+
 module.exports = router;
