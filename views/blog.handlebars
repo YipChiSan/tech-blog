@@ -1,9 +1,11 @@
-<div class="text-center">
-  <h2>{{title}}</h2>
+<div class="text-center" id="blog">
+  <h2 id="blog-title">{{title}}</h2>
   <p>{{{get_emoji}}}</p>
-  <p>{{context}}</p>
+  <p id="blog-context">{{context}}</p>
   <p>Created by {{user.name}} on {{format_date date_created}}</p>
   {{#if (isAuthor user.id user_id) }}
-    <button class="no-button">Edit</button>
+    <button class="no-button" id="edit-button">Edit</button>
   {{/if}}
 </div>
+
+
