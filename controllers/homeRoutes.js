@@ -41,8 +41,27 @@ router.get('/blog/:id', async (req, res) => {
 
     const blog = blogData.get({ plain: true });
 
+    const commentData = await Comment.findAll({
+      include: [
+        {
+          model: User,
+          attributes: ['name'],
+        },
+        {
+          model: Blog,
+        }
+      ],
+
+      where: {
+        blog_id: req.params.id
+      },
+    });
+
+    const comment = commentData.map((value) => value.get({plain: true}));
+
     res.render('blog', {
-      ...blog,
+      blog: blog,
+      comments: comment,
       logged_in: req.session.logged_in,
       user_id: req.session.user_id
     });
@@ -65,31 +84,6 @@ router.get('/profile', withAuth, async (req, res) => {
     res.render('profile', {
       ...user,
       logged_in: true
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-router.get('/comment/:id', withAuth, async (req, res) => {
-  try {
-    const commentData = await Comment.findByPk(req.params.id, {
-      include: [
-        {
-          model: User,
-          attributes: ['name'],
-        },
-        {
-          model: Blog,
-        }
-      ],
-    });
-
-    const comment = commentData.get({plain: true});
-
-    res.render('comment', {
-      ...comment,
-      logged_in: req.session.logged_in
     });
   } catch (err) {
     res.status(500).json(err);
