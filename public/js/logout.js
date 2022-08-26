@@ -10,6 +10,33 @@ const logout = async () => {
     alert(response.statusText);
   }
 };
+
+const blogID = document.querySelector('#blog').getAttribute("value");
+
+const updateHandler = async (event) => {
+    event.preventDefault();
+
+    const title = document.querySelector('#blog-title-input').value.trim();
+    const context = document.querySelector('#blog-context-input').value.trim();
+    
+    if (title && context) {
+      
+      const response = await fetch(`/api/blog/${blogID}`, {
+        method: 'PUT',
+        body: JSON.stringify({ title: title, context: context }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.ok) {
+        document.location.reload();
+      } else {
+        alert('Failed to update blog');
+      }
+    }
+}
+
 const editHandler = (event) => {
     event.preventDefault();
     const blogEl = document.querySelector('#blog');
@@ -17,7 +44,7 @@ const editHandler = (event) => {
     const context = document.querySelector('#blog-context').textContent.trim();
 
     const newForm = document.createElement("form");
-    newForm.setAttribute("class" , "form new-project-form");
+    newForm.setAttribute("class" , "form");
 
     const formTitleDiv = document.createElement('div');
     formTitleDiv.setAttribute("class", "form-group");
@@ -61,8 +88,8 @@ const editHandler = (event) => {
     formUpdateDiv.setAttribute("class", "form-group");
 
     const formUpdateBtn = document.createElement('button');
-    formUpdateBtn.setAttribute("type", "submit");
     formUpdateBtn.setAttribute("class", "btn btn-primary");
+    formUpdateBtn.addEventListener('click', updateHandler);
     formUpdateBtn.textContent = "Update";
 
     formUpdateDiv.appendChild(formUpdateBtn);
