@@ -57,8 +57,14 @@ router.get('/blog/:id', async (req, res) => {
       },
     });
 
-    const comment = commentData.map((value) => value.get({plain: true}));
-
+    const commentWithoutLog = commentData.map((value) => value.get({plain: true}));
+    const comment = commentWithoutLog.map((value) => {
+      return {
+        ...value,
+        logged_in_user: req.session.user_id,
+      };
+    });
+    
     res.render('blog', {
       blog: blog,
       comments: comment,
