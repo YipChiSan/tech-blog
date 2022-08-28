@@ -1,3 +1,4 @@
+const blogID = document.querySelector('#blog').getAttribute("value");
 const logout = async () => {
   const response = await fetch('/api/users/logout', {
     method: 'POST',
@@ -8,6 +9,28 @@ const logout = async () => {
     document.location.replace('/');
   } else {
     alert(response.statusText);
+  }
+};
+
+const createComment = async (event) => {
+  event.preventDefault();
+
+  const context = document.querySelector('#comment-context').value.trim();
+  console.log(context);
+  if ( context) {
+    const response = await fetch(`/api/comment`, {
+      method: 'POST',
+      body: JSON.stringify({context: context, blog_id: blogID }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (response.ok) {
+      document.location.reload();
+    } else {
+      alert('Failed to create comment');
+    }
   }
 };
 
@@ -61,8 +84,6 @@ const editCommentBtnHandler = (event) => {
     contextEl.appendChild(newForm);
   }
 };
-
-const blogID = document.querySelector('#blog').getAttribute("value");
 
 const updatePostHandler = async (event) => {
     event.preventDefault();
@@ -159,3 +180,5 @@ document
 document.querySelector('#logout').addEventListener('click', logout);
 
 document.querySelectorAll('.comment').forEach((value) => value.addEventListener('click', editCommentBtnHandler));
+
+document.querySelector('#comment-create').addEventListener('click', createComment);
