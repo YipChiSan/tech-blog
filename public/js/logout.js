@@ -11,9 +11,60 @@ const logout = async () => {
   }
 };
 
+const updateCommentHandler = async () => {
+
+};
+
+const editCommentBtnHandler = (event) => {
+  event.preventDefault();
+  const commentID = event.target.getAttribute("value");
+  
+  const selector = '#c' + commentID;
+  const contextEl = document.querySelector(selector);
+  const context = contextEl.textContent.trim();
+
+  if (context) {
+    const newForm = document.createElement("form");
+    newForm.setAttribute("class" , "form");
+
+    const formContextDiv = document.createElement('div');
+    formContextDiv.setAttribute("class", "form-group");
+
+    const formContextLabel = document.createElement('label');
+    formContextLabel.setAttribute('for', 'comment-context-input');
+    formContextLabel.textContent = "Comment Context:";
+
+    const formContextInput = document.createElement('input');
+    formContextInput.setAttribute("class", "form-input");
+    formContextInput.setAttribute("type", "text");
+    formContextInput.setAttribute("id", "comment-context-input");
+    formContextInput.setAttribute("name", "comment-context-input");
+    formContextInput.setAttribute("value", context);
+
+    formContextDiv.appendChild(formContextLabel);
+    formContextDiv.appendChild(formContextInput);
+
+    newForm.appendChild(formContextDiv);
+
+    const formUpdateDiv = document.createElement('div');
+    formUpdateDiv.setAttribute("class", "form-group");
+
+    const formUpdateBtn = document.createElement('button');
+    formUpdateBtn.setAttribute("class", "btn btn-primary");
+    formUpdateBtn.addEventListener('click', updateCommentHandler);
+    formUpdateBtn.textContent = "Update";
+
+    formUpdateDiv.appendChild(formUpdateBtn);
+    newForm.appendChild(formUpdateDiv);
+
+    contextEl.innerHTML = "";
+    contextEl.appendChild(newForm);
+  }
+};
+
 const blogID = document.querySelector('#blog').getAttribute("value");
 
-const updateHandler = async (event) => {
+const updatePostHandler = async (event) => {
     event.preventDefault();
 
     const title = document.querySelector('#blog-title-input').value.trim();
@@ -37,7 +88,7 @@ const updateHandler = async (event) => {
     }
 }
 
-const editHandler = (event) => {
+const editPostBtnHandler = (event) => {
     event.preventDefault();
     const blogEl = document.querySelector('#blog');
     const title = document.querySelector('#blog-title').textContent.trim();
@@ -89,7 +140,7 @@ const editHandler = (event) => {
 
     const formUpdateBtn = document.createElement('button');
     formUpdateBtn.setAttribute("class", "btn btn-primary");
-    formUpdateBtn.addEventListener('click', updateHandler);
+    formUpdateBtn.addEventListener('click', updatePostHandler);
     formUpdateBtn.textContent = "Update";
 
     formUpdateDiv.appendChild(formUpdateBtn);
@@ -103,6 +154,8 @@ const editHandler = (event) => {
 
 document
   .querySelector('#edit-button')
-  .addEventListener('click', editHandler);
+  .addEventListener('click', editPostBtnHandler);
 
 document.querySelector('#logout').addEventListener('click', logout);
+
+document.querySelectorAll('.comment').forEach((value) => value.addEventListener('click', editCommentBtnHandler));

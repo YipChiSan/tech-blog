@@ -11,11 +11,12 @@
 <div id="comment">
   <h3>Comment</h3>
   {{#each comments as |comment| }}
-  <p>{{comment.context}}</p>
-  <p style="color:blue;font-style: italic;display: inline-block">Created by {{comment.user.name}} on {{format_date comment.date_created}}</p>
-  {{#if (isAuthor comment.user_id comment.logged_in_user) }}
-    <button style="display: inline-block" class="no-button" >Edit Comment</button>
-  {{/if}}
+    <div id={{makeID comment.id}}>{{comment.context}}</div>
+    <p style="color:blue;font-style: italic;display: inline-block">Created by {{comment.user.name}} on {{format_date comment.date_created}}</p>
+    {{#if (isAuthor comment.user_id comment.logged_in_user) }}
+      <button style="display: inline-block" class="no-button comment" value={{comment.id}}>Edit Comment</button>
+    {{/if}}
+  
   {{/each}}
 </div>
 

@@ -19,5 +19,6 @@ module.exports = {
       return `<span for="img" aria-label="gear">⚙️</span>`;
     }
   },
-  isAuthor: (author, guest) => author === guest
+  isAuthor: (author, guest) => author === guest,
+  makeID: (comment) => "c" + comment,
 };
