@@ -1,4 +1,5 @@
 const blogID = document.querySelector('#blog').getAttribute("value");
+let commentID;
 const logout = async () => {
   const response = await fetch('/api/users/logout', {
     method: 'POST',
@@ -34,13 +35,32 @@ const createComment = async (event) => {
   }
 };
 
-const updateCommentHandler = async () => {
+const updateCommentHandler = async (event) => {
+    event.preventDefault();
 
+    const context = document.querySelector('#comment-context-input').value.trim();
+    
+    if (context) {
+      
+      const response = await fetch(`/api/comment/${commentID}`, {
+        method: 'PUT',
+        body: JSON.stringify({context: context }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.ok) {
+        document.location.reload();
+      } else {
+        alert('Failed to update comment');
+      }
+    }
 };
 
 const editCommentBtnHandler = (event) => {
   event.preventDefault();
-  const commentID = event.target.getAttribute("value");
+  commentID = event.target.getAttribute("value");
   
   const selector = '#c' + commentID;
   const contextEl = document.querySelector(selector);
