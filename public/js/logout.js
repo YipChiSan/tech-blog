@@ -35,6 +35,22 @@ const createComment = async (event) => {
   }
 };
 
+const delCommentBtnHandler = async (event) => {
+  if (event.target.hasAttribute('value')) {
+    const id = event.target.getAttribute('value');
+
+    const response = await fetch(`/api/comment/${id}`, {
+      method: 'DELETE',
+    });
+
+    if (response.ok) {
+      document.location.reload();
+    } else {
+      alert('Failed to delete comment');
+    }
+  }
+};
+
 const updateCommentHandler = async (event) => {
     event.preventDefault();
 
@@ -202,3 +218,4 @@ document.querySelector('#logout').addEventListener('click', logout);
 document.querySelectorAll('.comment').forEach((value) => value.addEventListener('click', editCommentBtnHandler));
 
 document.querySelector('#comment-create').addEventListener('click', createComment);
+document.querySelectorAll('.del-comment').forEach((value) => value.addEventListener('click', delCommentBtnHandler));

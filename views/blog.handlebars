@@ -15,6 +15,7 @@
     <p style="color:blue;font-style: italic;display: inline-block">Created by {{comment.user.name}} on {{format_date comment.date_created}}</p>
     {{#if (isAuthor comment.user_id comment.logged_in_user) }}
       <button style="display: inline-block" class="no-button comment" value={{comment.id}}>Edit Comment</button>
+      <button style="display: inline-block" class="no-button del-comment" value={{comment.id}}>Delete Comment</button>
     {{/if}}
   {{/each}}
 
