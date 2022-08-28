@@ -43,7 +43,6 @@ run
 
 ```
 mysql source schema.sql
-mysql source seeds.sql
 ```
 
 on mysql server
@@ -57,6 +56,7 @@ npm install
 on the root folder. Then run
 
 ```
+node seeds/seed.js
 node server.js
 ```
 
