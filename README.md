@@ -60,8 +60,7 @@ on the root folder. Then run
 node server.js
 ```
 
-## Video
+## Deployment
 
-You can watch a video for demonstrating how this app is used on here.
-https://drive.google.com/file/d/1YWUozd43uS0TFfXMOBrKYTE-WvjoXnhZ/view
+My app is deployed here.
 https://tech-blog-zixin.herokuapp.com/
