@@ -16,8 +16,19 @@
     {{#if (isAuthor comment.user_id comment.logged_in_user) }}
       <button style="display: inline-block" class="no-button comment" value={{comment.id}}>Edit Comment</button>
     {{/if}}
-  
   {{/each}}
+
+  {{#if logged_in}}
+  <form class="form">
+    <div class="form-group">
+        <label for="comment-context">Comment:</label>
+        <textarea class="form-input" id="comment-context" name="comment-context"></textarea>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary" id="comment-create">Create Comment</button>
+      </div>
+  </form>
+  {{/if}}
 </div>
 
 
