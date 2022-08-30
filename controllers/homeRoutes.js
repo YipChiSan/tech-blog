@@ -64,6 +64,7 @@ router.get('/blog/:id', async (req, res) => {
         logged_in_user: req.session.user_id,
       };
     });
+    console.log(comment);
     
     res.render('blog', {
       blog: blog,

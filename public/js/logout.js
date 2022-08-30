@@ -35,6 +35,8 @@ const createComment = async (event) => {
   }
 };
 
+
+
 const delCommentBtnHandler = async (event) => {
   if (event.target.hasAttribute('value')) {
     const id = event.target.getAttribute('value');
@@ -209,13 +211,19 @@ const editPostBtnHandler = (event) => {
     
 };
 
+if (document
+  .querySelector('#edit-button')) {
 document
   .querySelector('#edit-button')
   .addEventListener('click', editPostBtnHandler);
+  }
+
 
 document.querySelector('#logout').addEventListener('click', logout);
 
 document.querySelectorAll('.comment').forEach((value) => value.addEventListener('click', editCommentBtnHandler));
 
-document.querySelector('#comment-create').addEventListener('click', createComment);
+
 document.querySelectorAll('.del-comment').forEach((value) => value.addEventListener('click', delCommentBtnHandler));
+
+document.querySelector('#comment-create').addEventListener('click', createComment);
